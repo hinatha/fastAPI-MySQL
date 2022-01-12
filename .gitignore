@@ -3,3 +3,4 @@
 poetry.lock
 api/__pycache__
 api/routers/__pycache__
+api/schemas/__pycache__
