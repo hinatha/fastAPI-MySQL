@@ -6,6 +6,11 @@ import api.cruds.done as done_crud
 from api.db import get_db
 
 router = APIRouter()
+'''
+Execute APIRouter()
+FYI: 
+https://fastapi.tiangolo.com/tutorial/bigger-applications/#import-apirouter
+'''
 
 
 @router.put("/tasks/{task_id}/done", response_model=done_schema.DoneResponse)

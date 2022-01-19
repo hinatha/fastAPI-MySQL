@@ -6,7 +6,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 import api.models.task as task_model
 
-
+'''
+Optional[task_model.Done] = Union[task_model.Done, None]
+'''
 async def get_done(db: AsyncSession, task_id: int) -> Optional[task_model.Done]:
     result: Result = await db.execute(
         select(task_model.Done).filter(task_model.Done.id == task_id)
