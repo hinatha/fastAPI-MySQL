@@ -28,6 +28,9 @@ jobs:
       - name: Poetry Version
         run: |
           poetry --version
+      - name: Poetry Install Dependencies
+        run: |
+          poetry install --no-interaction
       - name: pytest
         run: poetry run pytest
       - name: linter
