@@ -25,8 +25,19 @@ isort = "^5.10.1"
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
 [tool.flake8]
-max-line-length = 90
+max-line-length = 119
 
 [tool.mypy]
 ignore_missing_imports = true
+
+[tool.taskipy.tasks]
+lint = { cmd = "task lint_flake8 && task lint_mypy", help = "exec lint" }
+fmt = { cmd = "task fmt_black && task fmt_isort", help = "format code" }
+lint_flake8 = "pflake8 api tests"
+lint_mypy = "mypy api tests"
+fmt_black = "black api tests"
+fmt_isort = "isort api tests"
