@@ -1,6 +1,6 @@
 name: test
 
-on: [push, pull_request]
+on: pull_request
 
 permissions:
   pull-requests: write
@@ -17,12 +17,12 @@ jobs:
         run: docker-compose build
       - name: Docker Compose Up
         run: docker-compose up -d
-      - name: pytest
-        run: docker-compose run --entrypoint "poetry run pytest" demo-app
       - name: linter
         run: docker-compose run --entrypoint "poetry run task lint" demo-app
       - name: formater
         run: docker-compose run --entrypoint "poetry run task fmt" demo-app
+      - name: pytest
+        run: docker-compose run --entrypoint "poetry run pytest" demo-app
 
 
   dependabot:
