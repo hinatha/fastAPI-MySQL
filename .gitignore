@@ -1,6 +1,6 @@
 .venv
 .dockervenv
-poetry.lock
+.mypy_cache
 api/__pycache__
 api/routers/__pycache__
 api/schemas/__pycache__
