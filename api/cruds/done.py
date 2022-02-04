@@ -1,4 +1,4 @@
-from typing import Tuple, Optional
+from typing import Optional, Tuple
 
 from sqlalchemy import select
 from sqlalchemy.engine import Result
@@ -6,15 +6,17 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 import api.models.task as task_model
 
-'''
+"""
 Optional[task_model.Done] = Union[task_model.Done, None]
-'''
+"""
+
+
 async def get_done(db: AsyncSession, task_id: int) -> Optional[task_model.Done]:
     result: Result = await db.execute(
         select(task_model.Done).filter(task_model.Done.id == task_id)
     )
     done: Optional[Tuple[task_model.Done]] = result.first()
-    return done[0] if done is not None else None  # 要素が一つであってもtupleで返却されるので１つ目の要素を取り出す
+    return done[0] if done is not None else None
 
 
 async def create_done(db: AsyncSession, task_id: int) -> task_model.Done:

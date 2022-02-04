@@ -1,11 +1,11 @@
 import pytest
+import starlette.status
 from httpx import AsyncClient
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 
-from api.db import get_db, Base
+from api.db import Base, get_db
 from api.main import app
-import starlette.status
 
 ASYNC_DB_URL = "sqlite+aiosqlite:///:memory:"
 
@@ -34,11 +34,13 @@ async def async_client() -> AsyncClient:
     async with AsyncClient(app=app, base_url="http://test") as client:
         yield client
 
-'''
+
+"""
 About assert
 FYI:
 https://codezine.jp/article/detail/12179
-'''
+"""
+
 
 @pytest.mark.asyncio
 async def test_create_and_read(async_client):
