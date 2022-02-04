@@ -1,16 +1,16 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 
-import api.schemas.done as done_schema
 import api.cruds.done as done_crud
+import api.schemas.done as done_schema
 from api.db import get_db
 
 router = APIRouter()
-'''
+"""
 Execute APIRouter()
-FYI: 
+FYI:
 https://fastapi.tiangolo.com/tutorial/bigger-applications/#import-apirouter
-'''
+"""
 
 
 @router.put("/tasks/{task_id}/done", response_model=done_schema.DoneResponse)
