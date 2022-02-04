@@ -56,6 +56,12 @@ This app is able to use below function.
 - SQLAlchemy
 - pymysql
 - aiomysql
+- GitHub Actions
+- mypy
+- flake8
+- black
+- isort
+- dependabot
   
 # Requirement
 [tool.poetry.dependencies]
@@ -64,11 +70,16 @@ This app is able to use below function.
 - uvicorn = {extras = ["standard"], version = "^0.16.0"}
 - SQLAlchemy = "^1.4.29"
 - aiomysql = "^0.0.22"
+- taskipy = "^1.9.0"
 
 [tool.poetry.dev-dependencies]
 - pytest-asyncio = "^0.17.0"
 - aiosqlite = "^0.17.0"
 - httpx = "^0.21.3"
+- mypy = "^0.931"
+- black = "^22.1.0"
+- pyproject-flake8 = "^0.0.1-alpha.2"
+- isort = "^5.10.1"
 
 [build-system]
 - requires = ["poetry-core>=1.0.0"]
@@ -95,6 +106,8 @@ $ docker-compose up
 $ docker-compose up
 $ docker-compose exec demo-app poetry add -D pytest-asyncio aiosqlite httpx
 $ docker-compose run --entrypoint "poetry run pytest" demo-app
+$ docker-compose run --entrypoint "poetry run task lint" demo-app
+$ docker-compose run --entrypoint "poetry run task fmt" demo-app
 ```
  
 # Future plans
