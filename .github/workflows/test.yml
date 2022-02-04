@@ -11,18 +11,29 @@ jobs:
   test:
     name: Run tests with pytest
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9"]
     steps:
       - uses: actions/checkout@v2
-      - name: docker Build
-        run: docker-compose build
-      - name: Docker Compose Up
-        run: docker-compose up -d
-      - name: linter
-        run: docker-compose run --entrypoint "poetry run task lint" demo-app
-      - name: formater
-        run: docker-compose run --entrypoint "poetry run task fmt" demo-app
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install poetry
+        run: |
+          curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+          echo "$HOME/.poetry/bin" >> $GITHUB_PATH
+      - name: Poetry Version
+        run: |
+          poetry --version
       - name: pytest
-        run: docker-compose run --entrypoint "poetry run pytest" demo-app
+        run: poetry run pytest
+      - name: linter
+        run: poetry run task lint
+      - name: formater
+        run: poetry run task fmt
 
 
   dependabot:
